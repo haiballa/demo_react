@@ -5,9 +5,11 @@ stages:
 - build
 - test
 - deploy staging
+- deploy production
 
 variables:
   STAGING_DOMAIN: luminess-chris-demo-react-staging.surge.sh
+  PRODUCTION_DOMAIN: luminess-chris-demo-react.surge.sh
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -41,6 +43,19 @@ test website:
   
 deploy staging:
   stage: deploy staging
+  environment:
+    name: staging
+    url: http://$STAGING_DOMAIN
   script:
   - npm install -g surge
   - surge --project ./build --domain $STAGING_DOMAIN
+
+deploy production:
+  stage: deploy production
+  environment:
+    name: production
+    url: http://$PRODUCTION_DOMAIN
+  script:
+  - npm install -g surge
+  - surge --project ./build --domain $PRODUCTION_DOMAIN
+  when: manual
