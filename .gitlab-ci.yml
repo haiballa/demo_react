@@ -46,6 +46,8 @@ deploy staging:
   environment:
     name: staging
     url: http://$STAGING_DOMAIN
+  only:
+  - features
   script:
   - npm install -g surge
   - surge --project ./build --domain $STAGING_DOMAIN
@@ -55,6 +57,8 @@ deploy production:
   environment:
     name: production
     url: http://$PRODUCTION_DOMAIN
+  only:
+  - master
   script:
   - npm install -g surge
   - surge --project ./build --domain $PRODUCTION_DOMAIN
