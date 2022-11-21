@@ -12,7 +12,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Se former à React 
+          Se former correctement à React 
         </a>
       </header>
     </div>
