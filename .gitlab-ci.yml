@@ -5,6 +5,11 @@ stages:
 - build
 - test
 
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules
+
 build website:
   stage: build
   script:
@@ -24,6 +29,6 @@ test website:
   stage: test
   script:
   - npm install
-  - npm run start
+  - npm run start &
 
   
