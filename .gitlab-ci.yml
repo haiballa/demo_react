@@ -1,14 +1,29 @@
 ---
+image: node:14.16-alpine # image par défaut
+
 stages:
 - build
+- test
 
 build website:
   stage: build
-  image: node:14.16-alpine
   script:
   - npm install
   - npm run build
   artifacts:
     paths:
     - ./build
+
+test artifact:
+  stage: test
+  image: alpine
+  script:
+  - grep -q "React" ./build/index.html
+
+test website:
+  stage: test
+  script:
+  - npm install
+  - npm run start
+
   
