@@ -27,8 +27,11 @@ test artifact:
 
 test website:
   stage: test
+  before_script:
+  - apk add --no-cache curl
   script:
-  - npm install
+  #- npm install
   - npm run start &
-
+  - sleep 30
+  - curl -Is localhost:3000 | head -n 1 | grep "OK"
   
